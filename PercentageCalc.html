@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENCLO Percentage Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            background-color: #3b5998;
+            color: white;
+            text-align: left;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 20px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex-grow: 1;
+        }
+        .content input {
+            width: 80px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .content button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .content .calculate-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .content .clear-btn {
+            background-color: #ccc;
+            color: black;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .copyright {
+            text-align: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">ENCLO Percentage Calculator</div><br>
+    <div class="content">
+        <h2>Percentage Calculator</h2><br>
+        <p>Please provide any two values below and click the "Calculate" button to get the third value.</p><br>
+        <input type="number" id="percentage" placeholder="%">
+        <span>% of</span>
+        <input type="number" id="value" placeholder="Value">
+        <span>=</span>
+        <input type="number" id="result" placeholder="Result">
+        <br>
+        <button class="calculate-btn" onclick="calculate()">Calculate</button>
+        <button class="clear-btn" onclick="clearFields()">Clear</button>
+        <div class="result" id="resultDisplay"></div>
+    </div>
+    <div class="copyright">
+        <p>Copyright © ENCLO Industries Pvt Ltd. All rights reserved.</p>
+    </div>
+    <script>
+        function calculate() {
+            const percentage = parseFloat(document.getElementById('percentage').value);
+            const value = parseFloat(document.getElementById('value').value);
+            const result = parseFloat(document.getElementById('result').value);
+            const resultDisplay = document.getElementById('resultDisplay');
+
+            if (!isNaN(percentage) && !isNaN(value)) {
+                const calculatedResult = (percentage / 100) * value;
+                document.getElementById('result').value = calculatedResult;
+                resultDisplay.textContent = `Result: ${percentage}% of ${value} is ${calculatedResult}`;
+            } else if (!isNaN(percentage) && !isNaN(result)) {
+                const calculatedValue = result / (percentage / 100);
+                document.getElementById('value').value = calculatedValue;
+                resultDisplay.textContent = `Value: ${percentage}% of ${calculatedValue} is ${result}`;
+            } else if (!isNaN(value) && !isNaN(result)) {
+                const calculatedPercentage = (result / value) * 100;
+                document.getElementById('percentage').value = calculatedPercentage;
+                resultDisplay.textContent = `Percentage: ${calculatedPercentage}% of ${value} is ${result}`;
+            } else {
+                resultDisplay.textContent = 'Please provide any two values.';
+            }
+        }
+
+        function clearFields() {
+            document.getElementById('percentage').value = '';
+            document.getElementById('value').value = '';
+            document.getElementById('result').value = '';
+            document.getElementById('resultDisplay').textContent = '';
+        }
+    </script>
+</body>
+</html>
